@@ -22,3 +22,32 @@ input {
     position: absolute;
     top: 32%;
 }
+
+
+/* Dashboard */
+
+.dashboard-hero {
+    width: 100%;
+    height: 60vh;
+    background-color: #eae6e4;
+}
+
+.dashboard-pic {
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+.dashboard-text {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    color: white;
+    top: 20%;
+    font-weight: 100;
+}
+
+.user-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}

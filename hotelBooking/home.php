@@ -3,7 +3,7 @@ session_start();
 require_once "components/db_connect.php";
 
 if (isset($_SESSION['adm'])) {
-    header("location: dashboard");
+    header("location: dashboard.php");
     exit;
 }
 
@@ -66,6 +66,7 @@ mysqli_close($connect);
             </div>
 
             <p class="nav-link">Welcome <?php echo $row['first_name'] . " " . $row['last_name'] ?></p>
+            <p> <a href="logout.php?logout">Logout</a></p>
         </div>
     </nav>
 
