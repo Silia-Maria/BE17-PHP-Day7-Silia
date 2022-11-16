@@ -7,7 +7,7 @@ $dbname = "hotelbooking";
 
 try {
     $connect = mysqli_connect($hostname, $username, $password, $dbname);
-    echo "connected";
+    // echo "connected";
 } catch (Exception $e) {
     echo "error" . mysqli_connect_error();
 }
