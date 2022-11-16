@@ -1,14 +1,15 @@
 <?php
 session_start();
 
+
 require_once "components/db_connect.php";
 
-if (isset($_SESSION['user']) != 0) {
+if (isset($_SESSION['user']) != "") {
     header("location: home.php");
     exit;
 }
 
-if (isset($_SESSION['adm']) != 0) {
+if (isset($_SESSION['adm']) != "") {
     header("location: dashboard.php");
     exit;
 }
@@ -91,7 +92,7 @@ mysqli_close($connect);
             <input type="password" autocomplete="off" class="w-100 mb-5" name="password" placeholder="Password">
             <span class="text-danger"><?php echo $passError ?></span>
 
-            <button class="btn btn-outline-dark w-100 mb-4" name="btn-register">Sign up</button>
+            <button class="btn btn-outline-dark w-100 mb-4" name="btn-login" type="submit">Sign up</button>
             <p class="text-center">Not registered yet? <a href="register.php">Click here!</a></p>
 
         </form>

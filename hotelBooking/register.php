@@ -151,7 +151,7 @@ mysqli_close($connect);
 
 
 
-            <button class="btn btn-outline-dark w-100 mb-4" name="btn-register">Sign up</button>
+            <button class="btn btn-outline-dark w-100 mb-4" name="btn-register" type="submit">Sign up</button>
             <p class="text-center">Already registered? <a href="index.php">Log in here!</a></p>
 
         </form>
