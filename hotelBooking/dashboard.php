@@ -123,7 +123,7 @@ mysqli_close($connect);
         <!--User Table-->
         <h2>Users</h2>
         <hr>
-        <table class="table">
+        <table class="table mb-5">
             <thead class="text-uppercase">
                 <tr>
                     <th>Name</th>
@@ -139,7 +139,10 @@ mysqli_close($connect);
         </table>
 
         <!--Hotels table-->
-        <h2>Hotels</h2>
+        <div class="d-flex justify-content-between">
+            <h2>Hotels</h2>
+            <a href="hotels/create.php"> <button class="btn btn-sm btn-outline-dark"> add new hotel</button></a>
+        </div>
         <hr>
         <table class="table">
             <thead class="text-uppercase">
