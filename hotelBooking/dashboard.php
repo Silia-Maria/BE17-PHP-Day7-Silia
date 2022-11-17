@@ -22,16 +22,16 @@ $tbody = "";
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
         $tbody .= "<tr>
-        <td class='d-flex justify-content-between'>
+        <td>
             <img src='pictures/" . $row['picture'] . "' alt='' class='user-pic'>
-            <p>" . $row['first_name'] . " " . $row['last_name'] . "</p>
+        " . $row['first_name'] . " " . $row['last_name'] . "
         </td>
         <td>" . $row['email'] . "</td>
         <td>" . $row['date_of_birth'] . "</td>
         <td>" . $row['fk_booking_id'] . "</td>
         <td>
-        <a>Edit</a>
-        <a>Delete</a>
+        <a href='update.php?id=" . $row['hotel_id'] . "'><button class='btn btn-outline-dark'>Edit1</button></a>
+        <a href='delete.php?id=" . $row['hotel_id'] . ">Delete</a>
         </td>
     </tr>";
     }
@@ -57,14 +57,14 @@ if ($result_hotels->num_rows > 0) {
         $hotel_body .= "<tr>
         <td class='d-flex justify-content-between'>
             <img src='pictures/" . $row_hotels['picture'] . "' alt='' class='user-pic'>
-            <p>" . $row_hotels['name'] . "</p>
+            <span>" . $row_hotels['name'] . "</span>
         </td>
         <td>" . $row_hotels['stars'] . "</td>
         <td>" . $row_hotels['location'] . "</td>
-        <td>" . $row_hotels['price'] . "</td>
+        <td> $" . $row_hotels['price'] . "</td>
         <td>
-        <a>Edit</a>
-        <a>Delete</a>
+        <a href='update.php?id=" . $row_hotels['hotel_id'] . "'><button class='btn btn-outline-dark'>Edit</button></a>
+        <a href='hotels/delete.php?id=" . $row_hotels['hotel_id'] . "'><button class='btn btn-outline-dark'>Delete</button></a>
         </td>
     </tr>";
     }

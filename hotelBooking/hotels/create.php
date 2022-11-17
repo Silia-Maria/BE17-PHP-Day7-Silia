@@ -69,7 +69,7 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
             <input name='picture' type="file" placeholder="picture" class="w-100 mb-5">
 
 
-            <a href="../dashboard.php"><button class="btn btn-outline-dark w-100 me-5 mb-3">Go Back</button></a>
+            <a href="../dashboard.php"><button class="btn btn-outline-dark w-100 me-5 mb-3" type='button'>Go Back</button></a>
 
             <button type='submit' class="btn btn-outline-dark w-100">Upload Hotel</button>
         </form>

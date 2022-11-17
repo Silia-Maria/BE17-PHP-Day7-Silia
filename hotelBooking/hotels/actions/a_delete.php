@@ -8,36 +8,26 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
     header("location: ../../index.php");
     exit;
 }
-
 require_once "../../components/db_connect.php";
-require_once "../../components/file_upload.php";
 
 if ($_POST) {
-    $name = $_POST['name'];
-    $price = $_POST['price'];
-    $location = $_POST['location'];
-    $stars = $_POST['stars'];
-    $uploadError = "";
-    $picture = file_upload($_FILES['picture'], 'hotel');
+    $hotel_id = $_POST['hotel_id'];
+    $picture = $_POST['picture'];
+    ($picture == "hotel.jpg") ?: unlink("../../pictures/$picture");
 
-    $sql = "INSERT INTO hotels (name, price, location, picture, stars) VALUES ('$name', $price, '$location', '$picture->fileName', $stars)";
-
-    if (mysqli_query($connect, $sql) == TRUE) {
+    $sql = "DELETE FROM hotels WHERE hotel_id = {$hotel_id}";
+    if (mysqli_query($connect, $sql) === TRUE) {
         $icon = "<i class='fa-regular fa-circle-check text-success icon-alert'></i>";
-        $message = "<div>New Hotel:  <em>$name </em> <br>was successfully uploaded!</div>";
-        $uploadError = ($picture->error != 0) ? $picture->ErrorMessage : "";
+        $message = "<div> The Hotel was successfully deleted!</div>";
     } else {
         $icon = "<i class='fa-regular fa-circle-xmark text-danger'></i>";
         $message = "Error while creating record. Please try again.. <br>" . $connect->error;
-        $uploadError = ($picture->error != 0) ? $picture->ErrorMessage : "";
     }
     mysqli_close($connect);
 } else {
-    header("Location: ../error.php");
+    header("location: ../error.php");
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,7 +37,7 @@ if ($_POST) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php require_once "../../components/style.php" ?>
     <link rel="stylesheet" href="../../style.css">
-    <title>Upload - Atlantic Hotel Booking</title>
+    <title>Delete - Atlantic Hotel Booking</title>
 </head>
 
 <body>
