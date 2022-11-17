@@ -30,7 +30,12 @@ if (mysqli_num_rows($resHotels) > 0) {
                 <p>Luxury Hotel in:</p>
                 <p>$rowHotels[location]</p>
                 <p>$rowHotels[price]</p>
-                <button type='button' class='btn btn-outline-dark'>book</button>
+
+                <form method='post' action='hotels/booking.php'>
+                <input type='hidden' name='hotel_id' value='" . $rowHotels['hotel_id'] . "'/>
+                <button type='submit' name='submit' class='btn btn-outline-dark'>book</button>
+                </form>
+                
             </div>
         </div>
     </div>";

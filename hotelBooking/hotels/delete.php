@@ -74,7 +74,7 @@ if ($_GET['id']) {
     <div class="container">
 
         <div class="d-flex">
-            <img src="pictures/<?php echo $picture ?>" class="user-pic">
+            <img src="../pictures/<?php echo $data['picture'] ?>" class="user-pic">
             <h5><?php echo $name ?> Stars: <?php echo $stars ?></h5>
         </div>
         <div class="d-flex">
@@ -86,8 +86,8 @@ if ($_GET['id']) {
         <form action="actions/a_delete.php" method="post">
             <input type="hidden" name="hotel_id" value="<?php echo $data['hotel_id'] ?>">
             <input type="hidden" name="picture" value="<?php echo $data['picture'] ?>">
-            <button class="btn btn-outline-black" type="submit">Yes, delete it!</button>
-            <a href="../dashboard.php"><button class="btn btn-outline-black" type="button">No, go back!</button></a>
+            <button class="btn btn-outline-dark" type="submit">Yes, delete it!</button>
+            <a href="../dashboard.php"><button class="btn btn-outline-dark" type="button">No, go back!</button></a>
         </form>
 
     </div>

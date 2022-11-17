@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (isset($_SESSION['user']) != "") {
-    header("location: ../../home.php");
+if (isset($_SESSION['adm']) != "") {
+    header("location: ../../dashboard.php");
     exit;
 }
 if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
@@ -10,30 +10,22 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
 }
 
 require_once "../../components/db_connect.php";
-require_once "../../components/file_upload.php";
 
 if ($_POST) {
-    $name = $_POST['name'];
-    $price = $_POST['price'];
-    $location = $_POST['location'];
-    $stars = $_POST['stars'];
-    $uploadError = "";
-    $picture = file_upload($_FILES['picture'], 'hotel');
+    $hotel_id = $_POST['hotel_id'];
+    $user_id = $_SESSION['user'];
+    $sql = "INSERT INTO booking (fk_hotel_id, fk_user_id) VALUES ($hotel_id, $user_id)";
 
-    $sql = "INSERT INTO hotels (name, price, location, picture, stars) VALUES ('$name', $price, '$location', '$picture->fileName', $stars)";
-
-    if (mysqli_query($connect, $sql) == TRUE) {
+    if (mysqli_query($connect, $sql) === TRUE) {
         $icon = "<i class='fa-regular fa-circle-check text-success icon-alert'></i>";
-        $message = "<div>New Hotel:  <em>$name </em> <br>was successfully uploaded!</div>";
-        $uploadError = ($picture->error != 0) ? $picture->ErrorMessage : "";
+        $message = "<div>Your booking was successfull!</div>";
     } else {
         $icon = "<i class='fa-regular fa-circle-xmark text-danger'></i>";
-        $message = "Error while creating record. Please try again.. <br>" . $connect->error;
-        $uploadError = ($picture->error != 0) ? $picture->ErrorMessage : "";
+        $message = "Error while booking your Room. Please try again.. <br>" . $connect->error;
     }
     mysqli_close($connect);
 } else {
-    header("Location: ../error.php");
+    header("location: ../error.php");
 }
 
 ?>
@@ -45,9 +37,9 @@ if ($_POST) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking - Atlantic Hotel Booking</title>
     <?php require_once "../../components/style.php" ?>
     <link rel="stylesheet" href="../../style.css">
-    <title>Upload - Atlantic Hotel Booking</title>
 </head>
 
 <body>
@@ -76,7 +68,7 @@ Alert
         <div class="w-50 mx-auto border rounded text-center p-5">
             <div class="mb-4"><?php echo $icon ?></div>
             <h5><?php echo $message ?></h5>
-            <a href="../../dashboard.php"><button class="btn btn-outline-dark mt-3">Go Back</button></a>
+            <a href="../../home.php"><button class="btn btn-outline-dark mt-3">Go Back</button></a>
         </div>
 
     </div>

@@ -15,6 +15,10 @@ if (isset($_SESSION['user'])) {
 $id = $_SESSION['adm'];
 $status = 'adm';
 $sql = "SELECT * FROM users WHERE status != '$status'";
+$booking_query = "SELECT * FROM hotels JOIN booking On (hotel_id) = (fk_hotel_id)";
+$result_booking = mysqli_query($connect, $booking_query);
+$data = mysqli_fetch_assoc($result_booking);
+
 $result = mysqli_query($connect, $sql);
 
 // Body for displaying the users
@@ -28,7 +32,8 @@ if ($result->num_rows > 0) {
         </td>
         <td>" . $row['email'] . "</td>
         <td>" . $row['date_of_birth'] . "</td>
-        <td>" . $row['fk_booking_id'] . "</td>
+        <td>" . $data['name'] . "</td>
+       
         <td>
         <a>Edit1</a>
         <a >Delete</a>
