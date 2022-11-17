@@ -22,14 +22,14 @@ $hotelcard = "";
 
 if (mysqli_num_rows($resHotels) > 0) {
     while ($rowHotels = mysqli_fetch_assoc($resHotels)) {
-        $hotelcard .= " <div class='row my-3'>
-        <img src='./pictures/$row[picture]' class='col-6' alt='...'>
+        $hotelcard .= " <div class='row my-5'>
+        <img src='./pictures/$rowHotels[picture]' class='col-6' alt='...'>
         <div class='col-6 '>
             <div class='m-5'>
-                <h3 class='mb-5'>$row[name] <span>stars</span></h3>
+                <h3 class='mb-5'>$rowHotels[name] <span>stars</span></h3>
                 <p>Luxury Hotel in:</p>
-                <p>$row[location]</p>
-                <p>$row[price]</p>
+                <p>$rowHotels[location]</p>
+                <p>$rowHotels[price]</p>
                 <button type='button' class='btn btn-outline-dark'>book</button>
             </div>
         </div>
@@ -67,6 +67,7 @@ mysqli_close($connect);
 
             <p class="nav-link">Welcome <?php echo $row['first_name'] . " " . $row['last_name'] ?></p>
             <p> <a href="logout.php?logout">Logout</a></p>
+            <p> <a href="update.php?id=<?php echo $_SESSION['user'] ?>">Update Profile</a></p>
         </div>
     </nav>
 
@@ -86,7 +87,7 @@ mysqli_close($connect);
    Hotels
 -------------------->
     <div class="container mt-5">
-        <div class="text-center">
+        <div class="text-center mb-5">
             <h2>Welcome to Atlantic Hotel Booking</h2>
             <div class="mb-3">____</div>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis expedita deserunt modi blanditiis quia eius architecto exercitationem obcaecati recusandae reiciendis. Modi id similique earum velit accusantium culpa, ipsa et praesentium?</p>

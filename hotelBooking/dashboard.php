@@ -30,8 +30,8 @@ if ($result->num_rows > 0) {
         <td>" . $row['date_of_birth'] . "</td>
         <td>" . $row['fk_booking_id'] . "</td>
         <td>
-        <a href='update.php?id=" . $row['hotel_id'] . "'><button class='btn btn-outline-dark'>Edit1</button></a>
-        <a href='delete.php?id=" . $row['hotel_id'] . ">Delete</a>
+        <a>Edit1</a>
+        <a >Delete</a>
         </td>
     </tr>";
     }
@@ -55,16 +55,16 @@ $hotel_body = "";
 if ($result_hotels->num_rows > 0) {
     while ($row_hotels = $result_hotels->fetch_array(MYSQLI_ASSOC)) {
         $hotel_body .= "<tr>
-        <td class='d-flex justify-content-between'>
+        <td>
             <img src='pictures/" . $row_hotels['picture'] . "' alt='' class='user-pic'>
-            <span>" . $row_hotels['name'] . "</span>
+            " . $row_hotels['name'] . "
         </td>
         <td>" . $row_hotels['stars'] . "</td>
         <td>" . $row_hotels['location'] . "</td>
         <td> $" . $row_hotels['price'] . "</td>
         <td>
-        <a href='update.php?id=" . $row_hotels['hotel_id'] . "'><button class='btn btn-outline-dark'>Edit</button></a>
-        <a href='hotels/delete.php?id=" . $row_hotels['hotel_id'] . "'><button class='btn btn-outline-dark'>Delete</button></a>
+        <a href='hotels/update.php?id=" . $row_hotels['hotel_id'] . "'><button class='btn btn-outline-dark btn-sm'>Edit</button></a>
+        <a href='hotels/delete.php?id=" . $row_hotels['hotel_id'] . "'><button class='btn btn-outline-dark btn-sm'>Delete</button></a>
         </td>
     </tr>";
     }
@@ -103,6 +103,7 @@ mysqli_close($connect);
             </div>
 
             <p> <a href="logout.php?logout">Logout</a></p>
+            <p><a href="update.php?id=<?php echo $_SESSION['adm'] ?>">Update Profile</a></p>
         </div>
     </nav>
 

@@ -128,30 +128,35 @@ mysqli_close($connect);
             <?php
             }
             ?>
+            <div class="mb-4">
+                <input type="text" class="w-100 " name="fname" placeholder="First Name" value="<?php echo $fname ?>">
+                <span class="text-danger small"><?php echo $fnameError ?></span>
+            </div>
 
-            <input type="text" class="w-100 mb-4" name="fname" placeholder="First Name" value="<?php echo $fname ?>">
-            <span class="text-danger"><?php echo $fnameError ?></span>
-
-            <input type="text" class="w-100 mb-4" name="lname" placeholder="Last Name" value="<?php echo $lname ?>">
-            <span class="text-danger"><?php echo $fnameError ?></span>
-
-
-
-            <input type="text" class="w-100 mb-4" name="email" placeholder="Email Address" value="<?php echo $email ?>">
-            <span class="text-danger"><?php echo $emailError ?></span>
-
-            <input type="date" class="w-100 mb-4" name="date_of_birth" value="<?php echo $date_of_birth ?>">
-            <span class="text-danger"><?php echo $dateError ?></span>
-
-            <input type="file" class="w-100 mb-4" name="picture">
-            <span class="text-danger"><?php echo $picError ?></span>
-
-            <input type="password" class="w-100 mb-5" name="password" placeholder="Password">
-            <span class="text-danger"><?php echo $passError ?></span>
-
+            <div class="mb-4">
+                <input type="text" class="w-100 " name="lname" placeholder="Last Name" value="<?php echo $lname ?>">
+                <span class="text-danger small"><?php echo $fnameError ?></span>
+            </div>
+            <div class="mb-4">
+                <input type="text" class="w-100 " name="email" placeholder="Email Address" value="<?php echo $email ?>">
+                <span class="text-danger small"><?php echo $emailError ?></span>
+            </div>
+            <div class="mb-4">
+                <input type="date" class="w-100 " name="date_of_birth" value="<?php echo $date_of_birth ?>">
+                <span class="text-danger small"><?php echo $dateError ?></span>
+            </div>
+            <div class="mb-4">
+                <input type="file" class="w-100 " name="picture">
+                <span class="text-danger small"><?php echo $picError ?></span>
+            </div>
+            <div class="mb-4">
+                <input type="password" class="w-100 " name="password" placeholder="Password">
+                <span class="text-danger small mb-5"><?php echo $passError ?></span>
+            </div>
 
 
             <button class="btn btn-outline-dark w-100 mb-4" name="btn-register" type="submit">Sign up</button>
+
             <p class="text-center">Already registered? <a href="index.php">Log in here!</a></p>
 
         </form>

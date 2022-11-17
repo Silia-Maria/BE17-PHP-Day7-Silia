@@ -54,12 +54,12 @@ if ($_POST) {
             <div class="collapse navbar-collapse" id="navbarNav">
             </div>
 
-            <p> <a href="logout.php?logout">Logout</a></p>
+            <p> <a href="../../logout.php?logout">Logout</a></p>
         </div>
     </nav>
 
     <!------------------
-    Nav Bar
+ Alert
 -------------------->
 
     <div class="container mt-5">

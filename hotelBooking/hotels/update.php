@@ -1,7 +1,5 @@
 <?php
 session_start();
-require_once "../components/db_connect.php";
-
 if (isset($_SESSION['user']) != "") {
     header("location: ../home.php");
     exit;
@@ -11,8 +9,28 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
     exit;
 }
 
-?>
+require_once "../components/db_connect.php";
 
+if ($_GET['id']) {
+    $hotel_id = $_GET['id'];
+    $sql = "SELECT * FROM hotels WHERE hotel_id = {$hotel_id}";
+    $result = mysqli_query($connect, $sql);
+    if (mysqli_num_rows($result) == 1) {
+        $data = mysqli_fetch_assoc($result);
+        $name = $data['name'];
+        $location = $data['location'];
+        $price = $data['price'];
+        $stars = $data['stars'];
+        $picture = $data['picture'];
+    } else {
+        header("location: error.php");
+    }
+    mysqli_close($connect);
+} else {
+    header("location: error.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,31 +65,34 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
 -------------------->
     <div class="dashboard-hero">
         <div class="dashboard-text">
-            <h1>New Hotels <br> coming to Atlantic Hotel Booking...</h1>
+            <h1>Updating Hotel: <br> <em><?php $name ?></em></h1>
         </div>
     </div>
 
     <!------------------
-   Form to create new Hotel
+   Form 
 -------------------->
 
     <div class="container my-5">
-        <form action="actions/a_create.php" method="post" enctype="multipart/form-data" class="mx-auto w-75">
+        <form action="actions/a_update.php" method="post" enctype="multipart/form-data" class="mx-auto w-75">
             <div class="d-flex mb-3">
-                <input name='name' type="text" placeholder="Name" class="w-50 me-5">
-                <input name='stars' type="number" placeholder="Stars (max 5)" class="w-50">
+                <input name='name' type="text" placeholder="Name" class="w-50 me-5" value='<?php echo $name ?>'>
+                <input name='stars' type="number" placeholder="Stars (max 5)" class="w-50" value='<?php echo $stars ?>'>
             </div>
             <div class="d-flex mb-3">
-                <input name='location' type="text" placeholder="location" class="w-50 me-5">
+                <input name='location' type="text" placeholder="location" class="w-50 me-5" value='<?php echo $location ?>'>
 
-                <input name='price' type="text" placeholder="Price per night $" class="w-50">
+                <input name='price' type="text" placeholder="Price per night $" class="w-50" value='<?php echo $price ?>'>
             </div>
             <input name='picture' type="file" placeholder="picture" class="w-100 mb-5">
 
 
+            <input type="hidden" name="hotel_id" value="<?php echo $data['hotel_id'] ?>">
+            <input type="hidden" name="picture" value="<?php echo $data['picture'] ?>">
+
             <a href="../dashboard.php"><button class="btn btn-outline-dark w-100 me-5 mb-3" type='button'>Go Back</button></a>
 
-            <button type='submit' class="btn btn-outline-dark w-100">Upload Hotel</button>
+            <button type='submit' class="btn btn-outline-dark w-100">Save Changes</button>
         </form>
 
 

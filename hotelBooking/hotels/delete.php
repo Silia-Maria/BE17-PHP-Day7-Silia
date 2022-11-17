@@ -56,7 +56,7 @@ if ($_GET['id']) {
             <div class="collapse navbar-collapse" id="navbarNav">
             </div>
 
-            <p> <a href="logout.php?logout">Logout</a></p>
+            <p> <a href="../logout.php?logout">Logout</a></p>
         </div>
     </nav>
 
@@ -84,8 +84,8 @@ if ($_GET['id']) {
 
         <h3>Do you really want to delelte this hotel?</h3>
         <form action="actions/a_delete.php" method="post">
-            <input type="hidden" name="hotel_id" value="<?php echo $hotel_id ?>">
-            <input type="hidden" name="picture" value="<?php echo $picture ?>">
+            <input type="hidden" name="hotel_id" value="<?php echo $data['hotel_id'] ?>">
+            <input type="hidden" name="picture" value="<?php echo $data['picture'] ?>">
             <button class="btn btn-outline-black" type="submit">Yes, delete it!</button>
             <a href="../dashboard.php"><button class="btn btn-outline-black" type="button">No, go back!</button></a>
         </form>

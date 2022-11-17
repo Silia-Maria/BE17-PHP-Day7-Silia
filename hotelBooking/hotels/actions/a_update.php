@@ -8,32 +8,36 @@ if (!isset($_SESSION['adm']) && !isset($_SESSION['user'])) {
     header("location: ../../index.php");
     exit;
 }
-
 require_once "../../components/db_connect.php";
 require_once "../../components/file_upload.php";
 
+# all $_POST['values'] come from the form in update.php
 if ($_POST) {
     $name = $_POST['name'];
-    $price = $_POST['price'];
     $location = $_POST['location'];
     $stars = $_POST['stars'];
+    $price = $_POST['price'];
+    $id = $_POST['hotel_id'];
     $uploadError = "";
     $picture = file_upload($_FILES['picture'], 'hotel');
-
-    $sql = "INSERT INTO hotels (name, price, location, picture, stars) VALUES ('$name', $price, '$location', '$picture->fileName', $stars)";
-
-    if (mysqli_query($connect, $sql) == TRUE) {
+    if ($picture->error === 0) {
+        ($_POST['picture'] == 'hotel.jpg') ?: unlink("../../pictures/$_POST[picture]");
+        $sql = "UPDATE hotels SET name='$name', price = $price, location='$location', picture='$picture->fileName', stars=$stars WHERE hotel_id = {$id}";
+    } else {
+        $sql = "UPDATE hotels SET name='$name', price = $price, location='$location', stars=$stars WHERE hotel_id = {$id}";
+    }
+    if (mysqli_query($connect, $sql) === TRUE) {
         $icon = "<i class='fa-regular fa-circle-check text-success icon-alert'></i>";
-        $message = "<div>New Hotel:  <em>$name </em> <br>was successfully uploaded!</div>";
+        $message = "<div> The Hotel was successfully updated!</div>";
         $uploadError = ($picture->error != 0) ? $picture->ErrorMessage : "";
     } else {
         $icon = "<i class='fa-regular fa-circle-xmark text-danger'></i>";
-        $message = "Error while creating record. Please try again.. <br>" . $connect->error;
+        $message = "Error while updating record. Please try again.. <br>" . mysqli_connect_error();
         $uploadError = ($picture->error != 0) ? $picture->ErrorMessage : "";
     }
     mysqli_close($connect);
 } else {
-    header("Location: ../error.php");
+    header("location: ../error.php");
 }
 
 ?>
@@ -47,7 +51,7 @@ if ($_POST) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php require_once "../../components/style.php" ?>
     <link rel="stylesheet" href="../../style.css">
-    <title>Upload - Atlantic Hotel Booking</title>
+    <title>Delete - Atlantic Hotel Booking</title>
 </head>
 
 <body>
@@ -69,7 +73,7 @@ if ($_POST) {
     </nav>
 
     <!------------------
-    Nav Bar
+ Alert
 -------------------->
 
     <div class="container mt-5">
